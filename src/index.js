@@ -1,13 +1,10 @@
-import { app, BrowserWindow,} from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
 import started from 'electron-squirrel-startup';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
-
 const __dirname = path.dirname(__filename);
-
-
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (started) {
@@ -20,23 +17,22 @@ const createWindow = () => {
     width: 500,
     height: 700,
     autoHideMenuBar: true,
-    
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
+      preload: path.join(__dirname, 'preload.js'), // Ensure this path is correct
       nodeIntegration: true,
       contextIsolation: false,
-      
     },
     frame: false,
     transparent: true,
-  })
-  ;
+  });
+
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, 'renderer/startpage.html'));
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools({mode: 'detach'});
-};
+  mainWindow.webContents.openDevTools({ mode: 'detach' });
+}
+
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -50,6 +46,10 @@ app.whenReady().then(() => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow();
     }
+  });
+
+  ipcMain.on('open-options-window', () => {
+    createOptionsWindow();
   });
 });
 
