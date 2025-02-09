@@ -1,45 +1,36 @@
-import { app, BrowserWindow, ipcMain } from 'electron';
-import started from 'electron-squirrel-startup';
-import path from 'path';
-import { fileURLToPath } from 'url';
+// filepath: /c:/Users/Vidara/Desktop/electorn app/my-app/src/index.js
+const { app, BrowserWindow, ipcMain } = require("electron");
+let mainWindow;
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
-// Handle creating/removing shortcuts on Windows when installing/uninstalling.
-if (started) {
-  app.quit();
-}
 
-const createWindow = () => {
-  // Create the browser window.
-  const mainWindow = new BrowserWindow({
+app.whenReady().then(() => {
+  mainWindow = new BrowserWindow({
     width: 500,
     height: 700,
+    frame: false,
     autoHideMenuBar: true,
-    webPreferences: {
-      preload: path.join(__dirname, 'preload.js'), // Ensure this path is correct
+    webPreferences: { 
       nodeIntegration: true,
       contextIsolation: false,
+      enableRemoteModule: true,
     },
     frame: false,
     transparent: true,
   });
 
-  // and load the index.html of the app.
-  mainWindow.loadFile(path.join(__dirname, 'renderer/startpage.html'));
+  mainWindow.loadFile('src/startpage.html');
+  //mainWindow.loadFile(path.join(__dirname, 'renderer/startpage.html'));
 
-  // Open the DevTools.
-  mainWindow.webContents.openDevTools({ mode: 'detach' });
-}
+   // Open the DevTools.
+   mainWindow.webContents.openDevTools({ mode: 'detach' });
 
+   ipcMain.on("navigate", (event, page)=>{
+    mainWindow.loadFile(page);
+   });
+   
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
-app.whenReady().then(() => {
-  createWindow();
-
+});
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   app.on('activate', () => {
@@ -47,12 +38,6 @@ app.whenReady().then(() => {
       createWindow();
     }
   });
-
-  ipcMain.on('open-options-window', () => {
-    createOptionsWindow();
-  });
-});
-
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.

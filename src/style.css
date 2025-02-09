@@ -1,11 +1,11 @@
 /* style.css */
+
 body {
     font-family: 'pixelify Sans', sans-serif;
     width: 450px;
     height: 600px;
     border-radius: 5px;
     background-color: transparent; 
-    -webkit-app-region: drag;
     text-align: center;
 }
 
@@ -51,11 +51,33 @@ h1{
 }
 
 .button1{
+    font-family: "pixelify Sans"; 
     position: relative;
     top: 108px;
     width: 167px;
     height: 36px;
     background-color: #FFDAB2;
+    padding: 10px 20px;
+    border-radius: 8px;
     stroke-width: 3px;
     border-color: #EB986B;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.button1:hover{
+    background-color: #FFC58A;
+    transform: scale(1.1);
+}
+
+.options{
+    font-family: 'pixelify Sans', sans-serif;
+    width: 450px;
+    height: 600px;
+    border-radius: 5px;
+    background-color: transparent; 
+    -webkit-app-region: drag;
+    text-align: center;
+    background-color: #FFE773;
+    border-radius: 50px;
 }

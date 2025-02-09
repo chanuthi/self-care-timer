@@ -11,19 +11,19 @@
 </head>
 <body>
   <section class="canvas"> 
-    <div class="container">
-      <p class="p1">Time for some<br /> self care</p>
-      <button class="button1" id="button1">Start</button>
-      <script>
-        const { ipcRenderer } = require('electron');
-
-        document.getElementById('button1').addeventLisstner('click', () => {
-          ipcRenderer.send('start-timer');
-        });
-      </script>>
-
-      </script>     
-    </div>
+    <main>
+      <div class="container">
+        <p class="p1">Time for some<br /> self care</p>
+        <button class="button1" id="open-options-button">Start</button>
+      </div>
+    </main>
   </section>
+  <script>
+    const { ipcRenderer} = require("electron");
+
+    document.getElementById("open-options-button").addEventListener("click", ()=> {
+      ipcRenderer.send("navigate", "src/options.html");
+    });
+  </script>
 </body>
 </html>
