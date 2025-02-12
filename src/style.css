@@ -18,6 +18,7 @@ h1{
     text-align: center;
 }
 .canvas {
+    font-family: "pixelify Sans"; 
     position: relative;
     width: 100%;
     height: 100%;
@@ -27,6 +28,7 @@ h1{
 }
 
 .container{
+
     position: relative;
     top:80px;
     width:388px;
@@ -52,14 +54,15 @@ h1{
 
 .button1{
     font-family: "pixelify Sans"; 
+    font-size: 24px;
+    color: #EB986B;
     position: relative;
     top: 108px;
     width: 167px;
     height: 36px;
     background-color: #FFDAB2;
-    padding: 10px 20px;
     border-radius: 8px;
-    stroke-width: 3px;
+    stroke-width: 5px;
     border-color: #EB986B;
     cursor: pointer;
     transition: transform 0.3s ease, background-color 0.3s ease;
@@ -81,3 +84,5 @@ h1{
     background-color: #FFE773;
     border-radius: 50px;
 }
+
+
